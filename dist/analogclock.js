@@ -13,18 +13,58 @@ class AnalogClock extends HTMLElement {
       this.content.style.display = "flex";
       this.content.style.justifyContent = "center";
       this.content.style.padding = "5px";
-      //this.content.style.background = 'rgba(0, 0, 0, 0)';
-      var canvasSize = (config.diameter) ? ` width="${config.diameter}px" height="${config.diameter}px"` : '';
-      this.content.innerHTML = `<canvas${canvasSize}></canvas>`;
+      const canvas = document.createElement('canvas');
+
+      // --- diameter handling ---
+      if (config.diameter !== undefined) {
+        const d = config.diameter;
+
+        if (typeof d === 'number') {
+          // numeric → pixels
+          canvas.width = d;
+          canvas.height = d;
+        } else if (typeof d === 'string') {
+          if (/^\d+px$/.test(d)) {
+            // "220px" → intrinsic px
+            const size = parseInt(d, 10);
+            canvas.width = size;
+            canvas.height = size;
+          } else {
+            // Any other CSS length: var(--clock-size), 40dvh, 40vh, 50%, etc.
+            canvas.style.width = d;
+            canvas.style.height = d;
+          }
+        }
+      }
+
+      this.content.appendChild(canvas);
       card.appendChild(this.content);
       this.appendChild(card);
-      var canvas = this.content.children[0];
-      canvas.background_transparent
-      var ctx = canvas.getContext("2d");
-      //ctx.textAlign = "center";
-      //ctx.textBaseline = 'middle';
-      var radius = (canvas.width < canvas.height) ? canvas.width / 2.1 : canvas.height / 2.1;
-      //ctx.translate(canvas.width / 2, canvas.height / 2);
+
+      // --- sync canvas drawing buffer to rendered size ---
+      const rect = canvas.getBoundingClientRect();
+
+      if (!canvas.width || !canvas.height) {
+        // No intrinsic size set: fall back to rendered size or a default
+        canvas.width = rect.width || 220;
+        canvas.height = rect.height || 220;
+      } else if (
+        rect.width && rect.height &&
+        (rect.width !== canvas.width || rect.height !== canvas.height)
+      ) {
+        // If CSS sizing (var/%,vh,dvh, etc.) changed the box size,
+        // match the internal resolution to avoid blur.
+        canvas.width = rect.width;
+        canvas.height = rect.height;
+      }
+
+      const ctx = canvas.getContext("2d");
+      const radius = (canvas.width < canvas.height)
+        ? canvas.width / 2.1
+        : canvas.height / 2.1;
+
+
+      
       var canvasHourEl = document.createElement('canvas');
       canvasHourEl.width = canvas.width
       canvasHourEl.height = canvas.height
@@ -662,3 +702,4 @@ class AnalogClock extends HTMLElement {
 }
 
 customElements.define('analog-clock', AnalogClock);
+
