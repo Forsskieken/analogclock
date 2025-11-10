@@ -242,7 +242,7 @@ class AnalogClock extends HTMLElement {
       }
 
       drawClock();
-      if (this.hide_SecondHand) {
+      if (hide_SecondHand) {
         setInterval(drawClock, 10000);
       } else {
         setInterval(drawClock, 1000);
@@ -669,7 +669,7 @@ class AnalogClock extends HTMLElement {
                 if (themes[i].style_hourhand) { style_HourHand = themes[i].style_hourhand };
                 if (themes[i].style_minutehand) { style_MinuteHand = themes[i].style_minutehand };
                 if (themes[i].style_secondhand) { style_SecondHand = themes[i].style_secondhand };
-                if (themes[i].dateformat) { dateMask = themes[i].dateFormat };
+                if (themes[i].dateformat) { dateMask = themes[i].dateformat };
                 if (themes[i].timeformat) { timeFormat = themes[i].timeformat };
               }
             }
@@ -702,4 +702,5 @@ class AnalogClock extends HTMLElement {
 }
 
 customElements.define('analog-clock', AnalogClock);
+
 
