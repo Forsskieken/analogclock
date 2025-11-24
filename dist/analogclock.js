@@ -634,10 +634,163 @@ class AnalogClock extends HTMLElement {
       );
     }
 
-    function getConfig() {
-      // unchanged from your version (color + themes logic)
-      // (you can paste your existing getConfig body here)
+function getConfig() {
+        if (config.color_Background) color_Background = config.color_Background;
+        if (config.color_background) color_Background = config.color_background;
+        if (color_Background.startsWith('--')) {
+          color_Background = getComputedStyle(document.documentElement).getPropertyValue(color_Background);
+        }
+
+        if (config.color_Ticks) color_Ticks = config.color_Ticks;
+        if (config.color_ticks) color_Ticks = config.color_ticks;
+        if (color_Ticks.startsWith('--')) {
+          color_Ticks = getComputedStyle(document.documentElement).getPropertyValue(color_Ticks);
+        }
+
+        if (config.hide_minorticks == true) hide_MinorTicks = config.hide_minorticks;
+
+        if (config.hide_majorticks == true) hide_MajorTicks = config.hide_majorticks;
+
+        if (config.color_FaceDigits) color_FaceDigits = config.color_FaceDigits;
+        if (config.color_facedigits) color_FaceDigits = config.color_facedigits;
+        if (color_FaceDigits.startsWith('--')) {
+          color_FaceDigits = getComputedStyle(document.documentElement).getPropertyValue(color_FaceDigits);
+        }
+
+        if (config.locale) locale = config.locale;
+
+        if (config.color_DigitalTime) color_DigitalTime = config.color_DigitalTime;
+        if (config.color_digitaltime) color_DigitalTime = config.color_digitaltime;
+        if (color_DigitalTime.startsWith('--')) {
+          color_DigitalTime = getComputedStyle(document.documentElement).getPropertyValue(color_DigitalTime);
+        }
+
+        if (config.color_HourHand) color_HourHand = config.color_HourHand;
+        if (config.color_hourhand) color_HourHand = config.color_hourhand;
+        if (color_HourHand.startsWith('--')) {
+          color_HourHand = getComputedStyle(document.documentElement).getPropertyValue(color_HourHand);
+        }
+
+        if (config.color_MinuteHand) color_MinuteHand = config.color_MinuteHand;
+        if (config.color_minutehand) color_MinuteHand = config.color_minutehand;
+        if (color_MinuteHand.startsWith('--')) {
+          color_MinuteHand = getComputedStyle(document.documentElement).getPropertyValue(color_MinuteHand);
+        }
+
+        if (config.color_SecondHand) color_SecondHand = config.color_SecondHand;
+        if (config.color_secondhand) color_SecondHand = config.color_secondhand;
+        if (color_SecondHand.startsWith('--')) {
+          color_SecondHand = getComputedStyle(document.documentElement).getPropertyValue(color_SecondHand);
+        }
+
+        if (config.color_Time) color_Time = config.color_Time;
+        if (config.color_time) color_Time = config.color_time;
+        if (color_Time.startsWith('--')) {
+          color_Time = getComputedStyle(document.documentElement).getPropertyValue(color_Time);
+        }
+
+        if (config.color_Text) color_Text = config.color_Text;
+        if (config.color_text) color_Text = config.color_text;
+        if (color_Text.startsWith('--')) {
+          color_Text = getComputedStyle(document.documentElement).getPropertyValue(color_Text);
+        }
+
+        if (config.timezone) timezone = config.timezone;
+
+        if (config.timezonedisplayname) timezonedisplayname = config.timezonedisplayname;
+
+        if (config.showtimezone == true) showtimezone = true;
+        if (config.show_timezone == true) showtimezone = true;
+
+        if (config.hide_WeekNumber == false) hide_WeekNumber = false;
+        if (config.hide_weeknumber == false) hide_WeekNumber = false;
+
+        if (config.hide_FaceDigits == true) hide_FaceDigits = true;
+        if (config.hide_facedigits == true) hide_FaceDigits = true;
+
+        if (config.hide_Date == true) hide_Date = true;
+        if (config.hide_date == true) hide_Date = true;
+
+        if (config.hide_WeekDay == true) hide_WeekDay = true;
+        if (config.hide_weekday == true) hide_WeekDay = true;
+
+        if (config.hide_DigitalTime == true) hide_DigitalTime = true;
+        if (config.hide_digitaltime == true) hide_DigitalTime = true;
+
+        if (config.hide_SecondHand == true) hide_SecondHand = true;
+        if (config.hide_secondhand == true) hide_SecondHand = true;
+
+        if (config.style_hourhand) style_HourHand = config.style_hourhand;
+
+        if (config.style_minutehand) style_MinuteHand = config.style_minutehand;
+
+        if (config.style_secondhand) style_SecondHand = config.style_secondhand;
+
+        if (config.dateformat) dateMask = config.dateformat;
+
+        if (config.timeformat) timeFormat = config.timeformat;
+
+        if (config.demo == true) demo = true;
+
+        var themes = config.themes;
+        if (themes) {
+          try {
+            for (var i = 0; i < themes.length; i++) {
+              if (themes[i].time) {
+                var startTime = new Date();
+                var endTime = new Date();
+                startTime.setHours((themes[i].time.split('-')[0]).split(':')[0]);
+                startTime.setMinutes((themes[i].time.split('-')[0]).split(':')[1]);
+                startTime.setSeconds(0);
+                endTime.setHours((themes[i].time.split('-')[1]).split(':')[0]);
+                endTime.setMinutes((themes[i].time.split('-')[1]).split(':')[1]);
+                endTime.setSeconds(0);
+              }
+              var now = Date.now();
+              if ((endTime > startTime && (now > startTime && now < endTime)) || (endTime < startTime && (now > startTime || now < endTime))) {
+                if (themes[i].color_background) { color_Background = themes[i].color_background };
+                if (themes[i].color_ticks) { color_Ticks = themes[i].color_ticks };
+                if (themes[i].hide_minorticks == true) { hide_MinorTicks = true };
+                if (themes[i].hide_minorticks == false) { hide_MinorTicks = false };
+                if (themes[i].hide_majorticks == true) { hide_MajorTicks = true };
+                if (themes[i].hide_majorticks == false) { hide_MajorTicks = false };
+                if (themes[i].color_facedigits) { color_FaceDigits = themes[i].color_facedigits };
+                if (themes[i].locale) { locale = themes[i].locale };
+                if (themes[i].color_digitaltime) { color_DigitalTime = themes[i].color_digitaltime };
+                if (themes[i].color_hourhand) { color_HourHand = themes[i].color_hourhand };
+                if (themes[i].color_minutehand) { color_MinuteHand = themes[i].color_minutehand };
+                if (themes[i].color_secondhand) { color_SecondHand = themes[i].color_secondhand };
+                if (themes[i].color_time) { color_Time = themes[i].color_time };
+                if (themes[i].color_text) { color_Text = themes[i].color_text };
+                if (themes[i].timezonedisplayname) { timezonedisplayname = themes[i].timezonedisplayname };
+                if (themes[i].show_timezone == true) { showtimezone = true };
+                if (themes[i].show_timezone == false) { showtimezone = false };
+                if (themes[i].hide_weeknumber == true) { hide_WeekNumber = true };
+                if (themes[i].hide_weeknumber == false) { hide_WeekNumber = false };
+                if (themes[i].hide_facedigits == true) { hide_FaceDigits = true };
+                if (themes[i].hide_facedigits == false) { hide_FaceDigits = false };
+                if (themes[i].hide_date == true) { hide_Date = true };
+                if (themes[i].hide_date == false) { hide_Date = false };
+                if (themes[i].hide_weekday == true) { hide_WeekDay = true };
+                if (themes[i].hide_weekday == false) { hide_WeekDay = false };
+                if (themes[i].hide_digitaltime == true) { hide_DigitalTime = true };
+                if (themes[i].hide_digitaltime == false) { hide_DigitalTime = false };
+                if (themes[i].hide_secondhand == true) { hide_SecondHand = true };
+                if (themes[i].hide_secondhand == false) { hide_SecondHand = false };
+                if (themes[i].style_hourhand) { style_HourHand = themes[i].style_hourhand };
+                if (themes[i].style_minutehand) { style_MinuteHand = themes[i].style_minutehand };
+                if (themes[i].style_secondhand) { style_SecondHand = themes[i].style_secondhand };
+                if (themes[i].dateformat) { dateMask = themes[i].dateFormat };
+                if (themes[i].timeformat) { timeFormat = themes[i].timeformat };
+              }
+            }
+          } catch (err) {
+            showerror(err, ctx, radius)
+          }
+        }
+      }
     }
+
 
     function showerror(err, ctx, radius) {
       console.error("ANALOG-CLOCK Error: " + err.message);
