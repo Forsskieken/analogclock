@@ -789,7 +789,7 @@ function getConfig() {
           }
         }
       }
-    }
+    
 
 
     function showerror(err, ctx, radius) {
@@ -817,3 +817,4 @@ function getConfig() {
 if (!customElements.get("analog-clock")) {
   customElements.define("analog-clock", AnalogClock);
 }
+
