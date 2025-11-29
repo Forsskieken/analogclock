@@ -5,8 +5,9 @@ An analog clock card for Home Assistant Lovelace. Colors are fully customizable,
 This one accepts vw % and variable --clock-size
 
 ```diff
-- Breaking changes since You need to copy over the analogclok.js from the dist folder over to the place in HA /www/community/analogclock/.
-make sure HA is using it2.0
+- Breaking changes since original 2.0
+You need to copy over the analogclok.js from the dist folder over to the place in HA /www/community/analogclock/.
+make sure HA is using it
 
 ```
 [Formats](https://github.com/tomasrudh/analogclock/blob/3.0/Formats.md)
@@ -82,7 +83,7 @@ All colors can be entered in one of four different ways:
 - type: "custom:analog-clock"
   hide_secondHand: true
   locale: sv-SE
-  diameter: 200
+  diameter: 200 (you can now use vw % --var-clocksize)
   color_hourhand: "#326ba8"
   color_minutehand: "#3273a8"
   color_digitaltime: "#CCCCCC"
