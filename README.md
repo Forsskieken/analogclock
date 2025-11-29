@@ -6,7 +6,8 @@ This one accepts vw % and variable --clock-size
 
 ```diff
 - Breaking changes since 2.0
-Some of the formats for 'dateformat' and 'timeformat' have changed text. Please see 'Formats' for the new formats.
+You need to copy over the analogclok.js from the dist folder over to the place in HA /www/community/analogclock/.
+make sure HA is using it
 ```
 [Formats](https://github.com/tomasrudh/analogclock/blob/3.0/Formats.md)
 
