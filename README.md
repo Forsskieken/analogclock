@@ -2,6 +2,7 @@
 <a href="https://www.buymeacoffee.com/rudhan" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/default-orange.png" alt="Buy Me A Coffee" height="41" width="174"></a>
 # Lovelace Analog Clock
 An analog clock card for Home Assistant Lovelace. Colors are fully customizable, weekday names and date formats are localizable.
+This one accepts vw % and variable --clock-size
 
 ```diff
 - Breaking changes since 2.0
